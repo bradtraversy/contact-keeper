@@ -1,25 +1,29 @@
-import React, { useContext, useRef, useEffect } from 'react';
-import ContactContext from '../../context/contact/contactContext';
+import React, { useRef, useEffect } from 'react'
+import {
+  useContacts,
+  filterContacts,
+  clearFilter
+} from '../../context/contact/ContactState'
 
 const ContactFilter = () => {
-  const contactContext = useContext(ContactContext);
-  const text = useRef('');
+  const text = useRef('')
+  const [contactState, contactDispatch] = useContacts()
 
-  const { filterContacts, clearFilter, filtered } = contactContext;
+  const { filtered } = contactState
 
   useEffect(() => {
     if (filtered === null) {
-      text.current.value = '';
+      text.current.value = ''
     }
-  });
+  })
 
   const onChange = e => {
     if (text.current.value !== '') {
-      filterContacts(e.target.value);
+      filterContacts(contactDispatch, e.target.value)
     } else {
-      clearFilter();
+      clearFilter(contactDispatch)
     }
-  };
+  }
 
   return (
     <form>
@@ -30,7 +34,7 @@ const ContactFilter = () => {
         onChange={onChange}
       />
     </form>
-  );
-};
+  )
+}
 
-export default ContactFilter;
+export default ContactFilter
