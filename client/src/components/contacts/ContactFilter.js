@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React from 'react'
 import {
   useContacts,
   filterContacts,
@@ -6,19 +6,11 @@ import {
 } from '../../context/contact/ContactState'
 
 const ContactFilter = () => {
-  const text = useRef('')
-  const [contactState, contactDispatch] = useContacts()
-
-  const { filtered } = contactState
-
-  useEffect(() => {
-    if (filtered === null) {
-      text.current.value = ''
-    }
-  })
+  // eslint-disable-next-line no-unused-vars
+  const [_, contactDispatch] = useContacts()
 
   const onChange = e => {
-    if (text.current.value !== '') {
+    if (e.target.value !== '') {
       filterContacts(contactDispatch, e.target.value)
     } else {
       clearFilter(contactDispatch)
@@ -27,12 +19,7 @@ const ContactFilter = () => {
 
   return (
     <form>
-      <input
-        ref={text}
-        type='text'
-        placeholder='Filter Contacts...'
-        onChange={onChange}
-      />
+      <input type='text' placeholder='Filter Contacts...' onChange={onChange} />
     </form>
   )
 }
