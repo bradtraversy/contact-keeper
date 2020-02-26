@@ -55,7 +55,7 @@ export const register = async (dispatch, formData) => {
       payload: res.data
     })
 
-    loadUser()
+    loadUser(dispatch)
   } catch (err) {
     dispatch({
       type: REGISTER_FAIL,
@@ -74,7 +74,7 @@ export const login = async (dispatch, formData) => {
       payload: res.data
     })
 
-    loadUser()
+    loadUser(dispatch)
   } catch (err) {
     dispatch({
       type: LOGIN_FAIL,
