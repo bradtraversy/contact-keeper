@@ -28,6 +28,7 @@ const config = {
     'Content-Type': 'application/json'
   }
 }
+
 // Get Contacts
 export const getContacts = async dispatch => {
   try {
@@ -132,23 +133,7 @@ const ContactState = props => {
   const [state, dispatch] = useReducer(contactReducer, initialState)
 
   return (
-    <ContactContext.Provider
-      value={{
-        contacts: state.contacts,
-        current: state.current,
-        filtered: state.filtered,
-        error: state.error,
-        addContact,
-        deleteContact,
-        setCurrent,
-        clearCurrent,
-        updateContact,
-        filterContacts,
-        clearFilter,
-        getContacts,
-        clearContacts
-      }}
-    >
+    <ContactContext.Provider value={{ ...state, dispatch }}>
       {props.children}
     </ContactContext.Provider>
   )
