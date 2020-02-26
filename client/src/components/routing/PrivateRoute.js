@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import AuthContext from '../../context/auth/authContext';
+import React from 'react'
+import { Route, Redirect } from 'react-router-dom'
+import { useAuth } from '../../context/auth/AuthState'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const authContext = useContext(AuthContext);
-  const { isAuthenticated, loading } = authContext;
+  const [authState] = useAuth()
+  const { isAuthenticated, loading } = authState
   return (
     <Route
       {...rest}
@@ -16,7 +16,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         )
       }
     />
-  );
-};
+  )
+}
 
-export default PrivateRoute;
+export default PrivateRoute
