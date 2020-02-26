@@ -18,7 +18,7 @@ const Login = props => {
       setAlert(error, 'danger')
       clearErrors(authDispatch)
     }
-  }, [error, isAuthenticated, props.history])
+  }, [error, isAuthenticated, props.history, authDispatch, setAlert])
 
   const [user, setUser] = useState({
     email: '',

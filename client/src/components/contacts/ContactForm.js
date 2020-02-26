@@ -30,6 +30,7 @@ const ContactForm = () => {
       })
     }
   }, [current])
+
   const { name, email, phone, type } = contact
 
   const onChange = e =>
@@ -38,15 +39,15 @@ const ContactForm = () => {
   const onSubmit = e => {
     e.preventDefault()
     if (current === null) {
-      addContact(contact)
+      addContact(contactDispatch, contact)
     } else {
-      updateContact(contact)
+      updateContact(contactDispatch, contact)
     }
     clearAll()
   }
 
   const clearAll = () => {
-    clearCurrent()
+    clearCurrent(contactDispatch)
   }
 
   return (
