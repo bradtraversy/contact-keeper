@@ -45,6 +45,6 @@ export default (state, action) => {
         error: null
       }
     default:
-      return state
+      throw new Error(`Unsupported type of: ${action.type}`)
   }
 }
