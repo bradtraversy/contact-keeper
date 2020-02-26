@@ -17,7 +17,7 @@ import {
 // Create a custom hook to use the auth context
 
 export const useAuth = () => {
-  const { state, dispatch } = useContext(AuthConext)
+  const { state, dispatch } = useContext(AuthContext)
   return [state, dispatch]
 }
 
