@@ -83,7 +83,10 @@ export const login = async (dispatch, formData) => {
 }
 
 // Logout
-export const logout = dispatch => dispatch({ type: LOGOUT })
+export const logout = dispatch => {
+  dispatch({ type: LOGOUT })
+  setAuthToken(null)
+}
 
 // Clear Errors
 export const clearErrors = dispatch => dispatch({ type: CLEAR_ERRORS })
@@ -98,15 +101,9 @@ const AuthState = props => {
     user: null,
     error: null
   }
+  setAuthToken(initialState.token)
 
   const [state, dispatch] = useReducer(authReducer, initialState)
-
-  // useEffect(() => {
-  //   if (!state.token) {
-  //     localStorage.removeItem('token')
-  //     setAuthToken(state.token)
-  //   }
-  // }, [state.token])
 
   return (
     <AuthContext.Provider value={{ state: state, dispatch }}>
