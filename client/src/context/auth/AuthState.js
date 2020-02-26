@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useContext } from 'react'
 import axios from 'axios'
 import AuthContext from './authContext'
 import authReducer from './authReducer'
@@ -13,6 +13,13 @@ import {
   LOGOUT,
   CLEAR_ERRORS
 } from '../types'
+
+// Create a custom hook to use the auth context
+
+export const useAuth = () => {
+  const { state, dispatch } = useContext(AuthConext)
+  return [state, dispatch]
+}
 
 // Action creators
 
