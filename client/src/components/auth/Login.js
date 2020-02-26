@@ -1,46 +1,45 @@
-import React, { useState, useContext, useEffect } from 'react';
-import AuthContext from '../../context/auth/authContext';
-import AlertContext from '../../context/alert/alertContext';
+import React, { useState, useContext, useEffect } from 'react'
+import AlertContext from '../../context/alert/alertContext'
+import { useAuth, clearErrors, login } from '../../context/auth/AuthState'
 
 const Login = props => {
-  const alertContext = useContext(AlertContext);
-  const authContext = useContext(AuthContext);
+  const alertContext = useContext(AlertContext)
+  const { setAlert } = alertContext
 
-  const { setAlert } = alertContext;
-  const { login, error, clearErrors, isAuthenticated } = authContext;
+  const [authState, authDispatch] = useAuth()
+  const { error, isAuthenticated } = authState
 
   useEffect(() => {
     if (isAuthenticated) {
-      props.history.push('/');
+      props.history.push('/')
     }
 
     if (error === 'Invalid Credentials') {
-      setAlert(error, 'danger');
-      clearErrors();
+      setAlert(error, 'danger')
+      clearErrors(authDispatch)
     }
-    // eslint-disable-next-line
-  }, [error, isAuthenticated, props.history]);
+  }, [error, isAuthenticated, props.history])
 
   const [user, setUser] = useState({
     email: '',
     password: ''
-  });
+  })
 
-  const { email, password } = user;
+  const { email, password } = user
 
-  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value })
 
   const onSubmit = e => {
-    e.preventDefault();
+    e.preventDefault()
     if (email === '' || password === '') {
-      setAlert('Please fill in all fields', 'danger');
+      setAlert('Please fill in all fields', 'danger')
     } else {
-      login({
+      login(authDispatch, {
         email,
         password
-      });
+      })
     }
-  };
+  }
 
   return (
     <div className='form-container'>
@@ -77,7 +76,7 @@ const Login = props => {
         />
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

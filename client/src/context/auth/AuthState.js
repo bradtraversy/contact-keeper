@@ -71,6 +71,7 @@ export const login = async (dispatch, formData) => {
       type: LOGIN_SUCCESS,
       payload: res.data
     })
+    setAuthToken(res.data.token)
 
     loadUser(dispatch)
   } catch (err) {
@@ -100,13 +101,12 @@ const AuthState = props => {
 
   const [state, dispatch] = useReducer(authReducer, initialState)
 
-  useEffect(() => {
-    if (!state.token) localStorage.removeItem('token')
-    else if (localStorage.getItem('token') !== state.token) {
-      localStorage.setItem('token', state.token)
-    }
-    setAuthToken(state.token)
-  }, [state.token])
+  // useEffect(() => {
+  //   if (!state.token) {
+  //     localStorage.removeItem('token')
+  //     setAuthToken(state.token)
+  //   }
+  // }, [state.token])
 
   return (
     <AuthContext.Provider value={{ state: state, dispatch }}>
