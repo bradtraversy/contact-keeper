@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react'
+import React, { useReducer, useContext, useEffect } from 'react'
 import axios from 'axios'
 import AuthContext from './authContext'
 import authReducer from './authReducer'
@@ -101,6 +101,14 @@ const AuthState = props => {
   }
 
   const [state, dispatch] = useReducer(authReducer, initialState)
+
+  useEffect(() => {
+    if (!state.token) localStorage.removeItem('token')
+    else if (localStorage.getItem('token') !== state.token) {
+      localStorage.setItem('token', state.token)
+    }
+    setAuthToken(state.token)
+  }, [state.token])
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>
