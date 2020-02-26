@@ -8,8 +8,7 @@ import {
 } from '../../context/contact/ContactState'
 
 const ContactItem = ({ contact }) => {
-  // we don't need contact state here..
-  // eslint-disable-next-line
+  // eslint-disable-next-line no-unused-vars
   const [_, contactDispatch] = useContacts()
 
   const { _id, name, email, phone, type } = contact
