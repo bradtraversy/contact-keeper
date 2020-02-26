@@ -15,6 +15,13 @@ import {
 } from '../types'
 
 // Action creators
+
+const config = {
+  headers: {
+    'Content-Type': 'application/json'
+  }
+}
+
 // Load User
 export const loadUser = async dispatch => {
   setAuthToken(localStorage.token)
@@ -33,12 +40,6 @@ export const loadUser = async dispatch => {
 
 // Register User
 export const register = async (dispatch, formData) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-
   try {
     const res = await axios.post('/api/users', formData, config)
 
@@ -58,12 +59,6 @@ export const register = async (dispatch, formData) => {
 
 // Login User
 export const login = async (dispatch, formData) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-
   try {
     const res = await axios.post('/api/auth', formData, config)
 
