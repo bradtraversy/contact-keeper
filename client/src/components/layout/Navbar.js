@@ -8,6 +8,7 @@ const Navbar = ({ title, icon }) => {
   const [authState, authDispatch] = useAuth()
   const { isAuthenticated, user } = authState
 
+  // ignore unused var in destructuring
   // eslint-disable-next-line
   const [_, contactDispatch] = useContacts()
 
