@@ -109,7 +109,7 @@ const AuthState = props => {
   }, [state.token])
 
   return (
-    <AuthContext.Provider value={{ ...state, dispatch }}>
+    <AuthContext.Provider value={{ state: state, dispatch }}>
       {props.children}
     </AuthContext.Provider>
   )

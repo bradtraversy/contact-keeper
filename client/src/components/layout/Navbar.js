@@ -1,25 +1,24 @@
-import React, { Fragment, useContext, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import AuthContext from '../../context/auth/authContext';
-import ContactContext from '../../context/contact/contactContext';
+import React, { Fragment, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import { useAuth, loadUser, logout } from '../../context/auth/AuthState'
+import { useContacts, clearContacts } from '../../context/contact/ContactState'
 
 const Navbar = ({ title, icon }) => {
-  const authContext = useContext(AuthContext);
-  const contactContext = useContext(ContactContext);
+  const [authState, authDispatch] = useAuth()
+  const { isAuthenticated, user } = authState
 
-  const { isAuthenticated, logout, user, loadUser } = authContext;
-  const { clearContacts } = contactContext;
+  // eslint-disable-next-line
+  const [_, contactDispatch] = useContacts()
 
   useEffect(() => {
-    loadUser();
-    // eslint-disable-next-line
-  }, []);
+    loadUser(authDispatch)
+  }, [authDispatch])
 
   const onLogout = () => {
-    logout();
-    clearContacts();
-  };
+    logout(authDispatch)
+    clearContacts(contactDispatch)
+  }
 
   const authLinks = (
     <Fragment>
@@ -31,7 +30,7 @@ const Navbar = ({ title, icon }) => {
         </a>
       </li>
     </Fragment>
-  );
+  )
 
   const guestLinks = (
     <Fragment>
@@ -42,7 +41,7 @@ const Navbar = ({ title, icon }) => {
         <Link to='/login'>Login</Link>
       </li>
     </Fragment>
-  );
+  )
 
   return (
     <div className='navbar bg-primary'>
@@ -53,17 +52,17 @@ const Navbar = ({ title, icon }) => {
       </h1>
       <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
     </div>
-  );
-};
+  )
+}
 
 Navbar.propTypes = {
   title: PropTypes.string.isRequired,
   icon: PropTypes.string
-};
+}
 
 Navbar.defaultProps = {
   title: 'Contact Keeper',
   icon: 'fas fa-id-card-alt'
-};
+}
 
-export default Navbar;
+export default Navbar
