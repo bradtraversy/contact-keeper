@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useContext } from 'react'
 import axios from 'axios'
 import ContactContext from './contactContext'
 import contactReducer from './contactReducer'
@@ -14,6 +14,13 @@ import {
   CLEAR_FILTER,
   CONTACT_ERROR
 } from '../types'
+
+// Create a custom hook to use the contact context
+
+export const useContacts = () => {
+  const { state, dispatch } = useContext(ContactContext)
+  return [state, dispatch]
+}
 
 // action creators
 const config = {
