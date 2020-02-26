@@ -1,17 +1,23 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
-import ContactContext from '../../context/contact/contactContext';
+import React from 'react'
+import PropTypes from 'prop-types'
+import {
+  useContacts,
+  deleteContact,
+  setCurrent,
+  clearCurrent
+} from '../../context/contact/ContactState'
 
 const ContactItem = ({ contact }) => {
-  const contactContext = useContext(ContactContext);
-  const { deleteContact, setCurrent, clearCurrent } = contactContext;
+  // we don't need contact state here..
+  // eslint-disable-next-line
+  const [_, contactDispatch] = useContacts()
 
-  const { _id, name, email, phone, type } = contact;
+  const { _id, name, email, phone, type } = contact
 
   const onDelete = () => {
-    deleteContact(_id);
-    clearCurrent();
-  };
+    deleteContact(contactDispatch, _id)
+    clearCurrent(contactDispatch)
+  }
 
   return (
     <div className='card bg-light'>
@@ -42,7 +48,7 @@ const ContactItem = ({ contact }) => {
       <p>
         <button
           className='btn btn-dark btn-sm'
-          onClick={() => setCurrent(contact)}
+          onClick={() => setCurrent(contactDispatch, contact)}
         >
           Edit
         </button>
@@ -51,11 +57,11 @@ const ContactItem = ({ contact }) => {
         </button>
       </p>
     </div>
-  );
-};
+  )
+}
 
 ContactItem.propTypes = {
   contact: PropTypes.object.isRequired
-};
+}
 
-export default ContactItem;
+export default ContactItem
