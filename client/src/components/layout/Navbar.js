@@ -1,68 +1,68 @@
-import React, { Fragment, useEffect } from 'react'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
-import { useAuth, loadUser, logout } from '../../context/auth/AuthState'
-import { useContacts, clearContacts } from '../../context/contact/ContactState'
+import React, { Fragment, useEffect } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { useAuth, loadUser, logout } from "../../context/auth/AuthState";
+import { useContacts, clearContacts } from "../../context/contact/ContactState";
 
 const Navbar = ({ title, icon }) => {
-  const [authState, authDispatch] = useAuth()
-  const { isAuthenticated, user } = authState
+  const [authState, authDispatch] = useAuth();
+  const { isAuthenticated, user } = authState;
 
   // we just need the contact dispatch without state.
-  const contactDispatch = useContacts()[1]
+  const contactDispatch = useContacts()[1];
 
   useEffect(() => {
-    loadUser(authDispatch)
-  }, [authDispatch])
+    loadUser(authDispatch);
+  }, [authDispatch]);
 
   const onLogout = () => {
-    logout(authDispatch)
-    clearContacts(contactDispatch)
-  }
+    logout(authDispatch);
+    clearContacts(contactDispatch);
+  };
 
   const authLinks = (
     <Fragment>
       <li>Hello {user && user.name}</li>
       <li>
-        <a onClick={onLogout} href='#!'>
-          <i className='fas fa-sign-out-alt' />{' '}
-          <span className='hide-sm'>Logout</span>
+        <a onClick={onLogout} href="#!">
+          <i className="fas fa-sign-out-alt" />{" "}
+          <span className="hide-sm">Logout</span>
         </a>
       </li>
     </Fragment>
-  )
+  );
 
   const guestLinks = (
     <Fragment>
       <li>
-        <Link to='/register'>Register</Link>
+        <Link to="/register">Register</Link>
       </li>
       <li>
-        <Link to='/login'>Login</Link>
+        <Link to="/login">Login</Link>
       </li>
     </Fragment>
-  )
+  );
 
   return (
-    <div className='navbar bg-primary'>
+    <div className="navbar bg-primary">
       <h1>
-        <Link to='/'>
+        <Link to="/">
           <i className={icon} /> {title}
         </Link>
       </h1>
       <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
     </div>
-  )
-}
+  );
+};
 
 Navbar.propTypes = {
   title: PropTypes.string.isRequired,
   icon: PropTypes.string
-}
+};
 
 Navbar.defaultProps = {
-  title: 'Contact Keeper',
-  icon: 'fas fa-id-card-alt'
-}
+  title: "Contact Keeper",
+  icon: "fas fa-id-card-alt"
+};
 
-export default Navbar
+export default Navbar;

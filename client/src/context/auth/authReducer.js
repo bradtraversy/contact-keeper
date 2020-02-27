@@ -7,7 +7,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS
-} from '../types'
+} from "../types";
 
 export default (state, action) => {
   switch (action.type) {
@@ -17,7 +17,7 @@ export default (state, action) => {
         isAuthenticated: true,
         loading: false,
         user: action.payload
-      }
+      };
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       return {
@@ -25,7 +25,7 @@ export default (state, action) => {
         ...action.payload,
         isAuthenticated: true,
         loading: false
-      }
+      };
     case REGISTER_FAIL:
     case AUTH_ERROR:
     case LOGIN_FAIL:
@@ -37,13 +37,13 @@ export default (state, action) => {
         loading: false,
         user: null,
         error: action.payload
-      }
+      };
     case CLEAR_ERRORS:
       return {
         ...state,
         error: null
-      }
+      };
     default:
-      throw new Error(`Unsupported type of: ${action.type}`)
+      throw new Error(`Unsupported type of: ${action.type}`);
   }
-}
+};

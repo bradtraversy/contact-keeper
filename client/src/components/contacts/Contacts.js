@@ -1,20 +1,20 @@
-import React, { Fragment, useEffect } from 'react'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import ContactItem from './ContactItem'
-import Spinner from '../layout/Spinner'
-import { useContacts, getContacts } from '../../context/contact/ContactState'
+import React, { Fragment, useEffect } from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import ContactItem from "./ContactItem";
+import Spinner from "../layout/Spinner";
+import { useContacts, getContacts } from "../../context/contact/ContactState";
 
 const Contacts = () => {
-  const [contactState, contactDispatch] = useContacts()
+  const [contactState, contactDispatch] = useContacts();
 
-  const { contacts, filtered, loading } = contactState
+  const { contacts, filtered, loading } = contactState;
 
   useEffect(() => {
-    getContacts(contactDispatch)
-  }, [contactDispatch])
+    getContacts(contactDispatch);
+  }, [contactDispatch]);
 
   if (contacts !== null && contacts.length === 0 && !loading) {
-    return <h4>Please add a contact</h4>
+    return <h4>Please add a contact</h4>;
   }
 
   return (
@@ -26,7 +26,7 @@ const Contacts = () => {
                 <CSSTransition
                   key={contact._id}
                   timeout={500}
-                  classNames='item'
+                  classNames="item"
                 >
                   <ContactItem contact={contact} />
                 </CSSTransition>
@@ -35,7 +35,7 @@ const Contacts = () => {
                 <CSSTransition
                   key={contact._id}
                   timeout={500}
-                  classNames='item'
+                  classNames="item"
                 >
                   <ContactItem contact={contact} />
                 </CSSTransition>
@@ -45,7 +45,7 @@ const Contacts = () => {
         <Spinner />
       )}
     </Fragment>
-  )
-}
+  );
+};
 
-export default Contacts
+export default Contacts;
