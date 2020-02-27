@@ -7,7 +7,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS
-} from "../types";
+} from '../types';
 
 export default (state, action) => {
   switch (action.type) {

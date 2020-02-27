@@ -1,8 +1,8 @@
-import React, { Fragment, useEffect } from "react";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
-import ContactItem from "./ContactItem";
-import Spinner from "../layout/Spinner";
-import { useContacts, getContacts } from "../../context/contact/ContactState";
+import React, { Fragment, useEffect } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import ContactItem from './ContactItem';
+import Spinner from '../layout/Spinner';
+import { useContacts, getContacts } from '../../context/contact/ContactState';
 
 const Contacts = () => {
   const [contactState, contactDispatch] = useContacts();
@@ -26,7 +26,7 @@ const Contacts = () => {
                 <CSSTransition
                   key={contact._id}
                   timeout={500}
-                  classNames="item"
+                  classNames='item'
                 >
                   <ContactItem contact={contact} />
                 </CSSTransition>
@@ -35,7 +35,7 @@ const Contacts = () => {
                 <CSSTransition
                   key={contact._id}
                   timeout={500}
-                  classNames="item"
+                  classNames='item'
                 >
                   <ContactItem contact={contact} />
                 </CSSTransition>

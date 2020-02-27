@@ -1,8 +1,8 @@
-import React, { useReducer, useContext } from "react";
-import axios from "axios";
-import AuthContext from "./authContext";
-import authReducer from "./authReducer";
-import setAuthToken from "../../utils/setAuthToken";
+import React, { useReducer, useContext } from 'react';
+import axios from 'axios';
+import AuthContext from './authContext';
+import authReducer from './authReducer';
+import setAuthToken from '../../utils/setAuthToken';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -12,7 +12,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS
-} from "../types";
+} from '../types';
 
 // Create a custom hook to use the auth context
 
@@ -25,14 +25,14 @@ export const useAuth = () => {
 
 const config = {
   headers: {
-    "Content-Type": "application/json"
+    'Content-Type': 'application/json'
   }
 };
 
 // Load User
 export const loadUser = async dispatch => {
   try {
-    const res = await axios.get("/api/auth");
+    const res = await axios.get('/api/auth');
 
     dispatch({
       type: USER_LOADED,
@@ -46,7 +46,7 @@ export const loadUser = async dispatch => {
 // Register User
 export const register = async (dispatch, formData) => {
   try {
-    const res = await axios.post("/api/users", formData, config);
+    const res = await axios.post('/api/users', formData, config);
 
     dispatch({
       type: REGISTER_SUCCESS,
@@ -67,7 +67,7 @@ export const register = async (dispatch, formData) => {
 // Login User
 export const login = async (dispatch, formData) => {
   try {
-    const res = await axios.post("/api/auth", formData, config);
+    const res = await axios.post('/api/auth', formData, config);
 
     dispatch({
       type: LOGIN_SUCCESS,
@@ -98,7 +98,7 @@ export const clearErrors = dispatch => dispatch({ type: CLEAR_ERRORS });
 
 const AuthState = props => {
   const initialState = {
-    token: localStorage.getItem("token"),
+    token: localStorage.getItem('token'),
     isAuthenticated: null,
     loading: true,
     user: null,

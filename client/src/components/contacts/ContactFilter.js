@@ -1,16 +1,16 @@
-import React from "react";
+import React from 'react';
 import {
   useContacts,
   filterContacts,
   clearFilter
-} from "../../context/contact/ContactState";
+} from '../../context/contact/ContactState';
 
 const ContactFilter = () => {
   // we just need the conact dispatch without state.
   const contactDispatch = useContacts()[1];
 
   const onChange = e => {
-    if (e.target.value !== "") {
+    if (e.target.value !== '') {
       filterContacts(contactDispatch, e.target.value);
     } else {
       clearFilter(contactDispatch);
@@ -19,7 +19,7 @@ const ContactFilter = () => {
 
   return (
     <form>
-      <input type="text" placeholder="Filter Contacts..." onChange={onChange} />
+      <input type='text' placeholder='Filter Contacts...' onChange={onChange} />
     </form>
   );
 };

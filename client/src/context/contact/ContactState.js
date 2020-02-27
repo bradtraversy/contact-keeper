@@ -1,7 +1,7 @@
-import React, { useReducer, useContext } from "react";
-import axios from "axios";
-import ContactContext from "./contactContext";
-import contactReducer from "./contactReducer";
+import React, { useReducer, useContext } from 'react';
+import axios from 'axios';
+import ContactContext from './contactContext';
+import contactReducer from './contactReducer';
 import {
   GET_CONTACTS,
   ADD_CONTACT,
@@ -13,7 +13,7 @@ import {
   CLEAR_CONTACTS,
   CLEAR_FILTER,
   CONTACT_ERROR
-} from "../types";
+} from '../types';
 
 // Create a custom hook to use the contact context
 
@@ -25,14 +25,14 @@ export const useContacts = () => {
 // action creators
 const config = {
   headers: {
-    "Content-Type": "application/json"
+    'Content-Type': 'application/json'
   }
 };
 
 // Get Contacts
 export const getContacts = async dispatch => {
   try {
-    const res = await axios.get("/api/contacts");
+    const res = await axios.get('/api/contacts');
 
     dispatch({
       type: GET_CONTACTS,
@@ -49,7 +49,7 @@ export const getContacts = async dispatch => {
 // Add Contact
 export const addContact = async (dispatch, contact) => {
   try {
-    const res = await axios.post("/api/contacts", contact, config);
+    const res = await axios.post('/api/contacts', contact, config);
 
     dispatch({
       type: ADD_CONTACT,
