@@ -6,8 +6,8 @@ import {
 } from '../../context/contact/ContactState'
 
 const ContactFilter = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [_, contactDispatch] = useContacts()
+  // we just need the conact dispatch without state.
+  const contactDispatch = useContacts()[1]
 
   const onChange = e => {
     if (e.target.value !== '') {
