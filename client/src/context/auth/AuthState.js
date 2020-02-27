@@ -60,6 +60,7 @@ export const register = async (dispatch, formData) => {
       type: REGISTER_FAIL,
       payload: err.response.data.msg
     })
+    setAuthToken(null)
   }
 }
 
@@ -80,6 +81,7 @@ export const login = async (dispatch, formData) => {
       type: LOGIN_FAIL,
       payload: err.response.data.msg
     })
+    setAuthToken(null)
   }
 }
 
