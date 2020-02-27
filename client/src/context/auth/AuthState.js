@@ -52,6 +52,7 @@ export const register = async (dispatch, formData) => {
       type: REGISTER_SUCCESS,
       payload: res.data
     })
+    setAuthToken(res.data.token)
 
     loadUser(dispatch)
   } catch (err) {
