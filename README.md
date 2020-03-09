@@ -75,7 +75,6 @@ You'll note that we did not need to include `getContacts` in our dependency arra
 Ultimately a good rule of thumb when using react context along with hooks would be to not provide functions in your context state, especially if those functions have side effects. The only exception being the dispatch returned from useReducer.
 
 ## Postman Routes
------
 Test your routes in PostMan with the following...
 ### Users & Authentication Routes
 1. Register a new user - POST http://localhost:5000/api/users
