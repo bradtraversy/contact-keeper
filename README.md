@@ -14,7 +14,7 @@ The solution is not to add an empty array and tell the linter to ignore it (tryi
 We should keep our functions pure where possible and take all our data fetching methods out of context state.
 Take a look at [ContactState.js](https://github.com/bradtraversy/contact-keeper/blob/hookfix/client/src/context/auth/AuthState.js) as an example.
 You will see all of our action creators have been taken out of the context, this gurantees that the functions never change with a update to state and can be safely added to the dependency array in useEffect.
-Each function now takes a dispatch argument as the first parameter which is passed in at the time of invocation. We can safely provide the dispatch via our context as react gurantees that a disatch returned from useReducer is static and won't change. So the dispatch in our context state will not be a problem.
+Each function now takes a dispatch argument as the first parameter which is passed in at the time of invocation. We can safely provide the dispatch via our context as react gurantees that a dispatch returned from useReducer is static and won't change. So the dispatch in our context state will not be a problem.
 Here is our new `getContacts` function:
 
 ```js
@@ -85,6 +85,7 @@ Test your routes in PostMan with the following...
    |key    | value               |
    |Content-Type|application/json|
 
+
    Body
    ```JSON
    {
@@ -98,6 +99,7 @@ Test your routes in PostMan with the following...
    |-------|-------              |
    |key    | value               |
    |Content-Type|application/json|
+
 
    Body
    ```JSON
@@ -128,6 +130,8 @@ Test your routes in PostMan with the following...
    |key    | value               |
    |Content-Type|application/json|
    |x-auth-token|<VALID_TOKEN>|
+
+
    Body
    ```JSON
    {
@@ -142,6 +146,8 @@ Test your routes in PostMan with the following...
    |key    | value               |
    |Content-Type|application/json|
    |x-auth-token|<VALID_TOKEN>|
+
+
    Body
     ```JSON
    {
