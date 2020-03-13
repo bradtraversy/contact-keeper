@@ -13,7 +13,7 @@ To summarize the issues we faced in the course though, and why we had to use `//
 The solution is not to add an empty array and tell the linter to ignore it (trying to make a componentDidMount out of useEffect), but to think in terms of hooks and functions.
 We should keep our functions pure where possible and take all our data fetching methods out of context state.
 Take a look at [ContactState.js](https://github.com/bradtraversy/contact-keeper/blob/hookfix/client/src/context/auth/AuthState.js) as an example.
-You will see all of our action creators have been taken out of the context, this gurantees that the functions never change with a update to state and can be safely added to the dependency array in useEffect.
+You will see all of our action creators have been taken out of the context, this gurantees that the functions never change with a update to state and don't need to be added to the dependency array in useEffect.
 Each function now takes a dispatch argument as the first parameter which is passed in at the time of invocation. We can safely provide the dispatch via our context as react gurantees that a dispatch returned from useReducer is static and won't change. So the dispatch in our context state will not be a problem.
 Here is our new `getContacts` function:
 
@@ -75,91 +75,94 @@ You'll note that we did not need to include `getContacts` in our dependency arra
 Ultimately a good rule of thumb when using react context along with hooks would be to not provide functions in your context state, especially if those functions have side effects. The only exception being the dispatch returned from useReducer.
 
 ## Postman Routes
+
 Test your routes in PostMan with the following...
+
 ### Users & Authentication Routes
+
 1. Register a new user - POST http://localhost:5000/api/users
 
-   |Headers|                     |
-   |-------|-------              |
-   |key    | value               |
-   |Content-Type|application/json|
+   | Headers      |                  |
+   | ------------ | ---------------- |
+   | key          | value            |
+   | Content-Type | application/json |
 
+Body
 
-   Body
-   ```JSON
-   {
-	"name": "Sam Smith",
-	"email": "sam@gmail.com",
-	"password": "123456"
-   }
-    ```
+````JSON
+{
+"name": "Sam Smith",
+"email": "sam@gmail.com",
+"password": "123456"
+}
+ ```
 2. Login a user - POST http://localhost:5000/api/auth
-   |Headers|                     |
-   |-------|-------              |
-   |key    | value               |
-   |Content-Type|application/json|
+|Headers|                     |
+|-------|-------              |
+|key    | value               |
+|Content-Type|application/json|
 
 
-   Body
-   ```JSON
-   {
-	"email": "sam@gmail.com",
-	"password": "123456"
-   }
-    ```
+Body
+```JSON
+{
+"email": "sam@gmail.com",
+"password": "123456"
+}
+ ```
 3. Get logged in user - GET http://localhost:5000/api/auth
-   |Headers|                     |
-   |-------|-------              |
-   |key    | value               |
-   |Content-Type|application/json|
-   |x-auth-token|<VALID_TOKEN>|
+|Headers|                     |
+|-------|-------              |
+|key    | value               |
+|Content-Type|application/json|
+|x-auth-token|<VALID_TOKEN>|
 
 ### Contacts Routes
 1. Get a users contacts - GET
 
-   |Headers|                     |
-   |-------|-------              |
-   |key    | value               |
-   |Content-Type|application/json|
-   |x-auth-token|<VALID_TOKEN>|
+|Headers|                     |
+|-------|-------              |
+|key    | value               |
+|Content-Type|application/json|
+|x-auth-token|<VALID_TOKEN>|
 
 2. Add a new contact - POST http://localhost:5000/api/contacts
-   |Headers|                     |
-   |-------|-------              |
-   |key    | value               |
-   |Content-Type|application/json|
-   |x-auth-token|<VALID_TOKEN>|
+|Headers|                     |
+|-------|-------              |
+|key    | value               |
+|Content-Type|application/json|
+|x-auth-token|<VALID_TOKEN>|
 
 
-   Body
-   ```JSON
-   {
-	"name": "William Williams",
-	"email": "william@gmail.com",
-	"phone": "77575894"
-   }
-    ```
+Body
+```JSON
+{
+"name": "William Williams",
+"email": "william@gmail.com",
+"phone": "77575894"
+}
+ ```
 3. Update a contact - PUT http://localhost:5000/api/contacts/<CONTACT_ID>
-   |Headers|                     |
-   |-------|-------              |
-   |key    | value               |
-   |Content-Type|application/json|
-   |x-auth-token|<VALID_TOKEN>|
+|Headers|                     |
+|-------|-------              |
+|key    | value               |
+|Content-Type|application/json|
+|x-auth-token|<VALID_TOKEN>|
 
 
-   Body
-    ```JSON
-   {
-	 "phone": "555555"
-   }
-    ```
+Body
+ ```JSON
+{
+"phone": "555555"
+}
+ ```
 4. Delete a contact - DELETE http://localhost:5000/api/contacts/<CONTACT_ID>
-   |Headers|                     |
-   |-------|-------              |
-   |key    | value               |
-   |Content-Type|application/json|
-   |x-auth-token|<VALID_TOKEN>|
-   
+|Headers|                     |
+|-------|-------              |
+|key    | value               |
+|Content-Type|application/json|
+|x-auth-token|<VALID_TOKEN>|
+
 ## Usage
 
 Install dependencies
@@ -168,7 +171,7 @@ Install dependencies
 npm install
 cd client
 npm install
-```
+````
 
 ### Mongo connection setup
 
