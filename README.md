@@ -89,7 +89,7 @@ Test your routes in PostMan with the following...
 
 Body
 
-````JSON
+```JSON
 {
 "name": "Sam Smith",
 "email": "sam@gmail.com",
