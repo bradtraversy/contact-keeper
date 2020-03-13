@@ -97,8 +97,9 @@ Body
 }
  ```
 2. Login a user - POST http://localhost:5000/api/auth
+
 |Headers|                     |
-|-------|-------              |
+|-------|---------------------|
 |key    | value               |
 |Content-Type|application/json|
 
@@ -111,6 +112,7 @@ Body
 }
  ```
 3. Get logged in user - GET http://localhost:5000/api/auth
+
 |Headers|                     |
 |-------|-------              |
 |key    | value               |
@@ -127,6 +129,7 @@ Body
 |x-auth-token|<VALID_TOKEN>|
 
 2. Add a new contact - POST http://localhost:5000/api/contacts
+
 |Headers|                     |
 |-------|-------              |
 |key    | value               |
@@ -143,6 +146,7 @@ Body
 }
  ```
 3. Update a contact - PUT http://localhost:5000/api/contacts/<CONTACT_ID>
+
 |Headers|                     |
 |-------|-------              |
 |key    | value               |
@@ -157,6 +161,7 @@ Body
 }
  ```
 4. Delete a contact - DELETE http://localhost:5000/api/contacts/<CONTACT_ID>
+
 |Headers|                     |
 |-------|-------              |
 |key    | value               |
@@ -171,7 +176,7 @@ Install dependencies
 npm install
 cd client
 npm install
-````
+```
 
 ### Mongo connection setup
 
