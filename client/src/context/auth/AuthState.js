@@ -102,8 +102,10 @@ const AuthState = (props) => {
 
   const [state, dispatch] = useReducer(authReducer, initialState);
 
+  // set token on initial app loading
   setAuthToken(state.token);
 
+  // 'watch' state.token and set headers and local storage on any change
   useEffect(() => {
     setAuthToken(state.token);
   }, [state.token]);
