@@ -9,7 +9,7 @@ const ContactFilter = () => {
   // we just need the conact dispatch without state.
   const contactDispatch = useContacts()[1];
 
-  const onChange = e => {
+  const onChange = (e) => {
     if (e.target.value !== '') {
       filterContacts(contactDispatch, e.target.value);
     } else {
@@ -18,7 +18,7 @@ const ContactFilter = () => {
   };
 
   return (
-    <form>
+    <form onSubmit={(e) => e.preventDefault()}>
       <input type='text' placeholder='Filter Contacts...' onChange={onChange} />
     </form>
   );
