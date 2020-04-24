@@ -105,6 +105,11 @@ const AuthState = (props) => {
   // set token on initial app loading
   setAuthToken(state.token);
 
+  // load user on first run or refresh
+  if (state.token && !state.user) {
+    loadUser(dispatch);
+  }
+
   // 'watch' state.token and set headers and local storage on any change
   useEffect(() => {
     setAuthToken(state.token);

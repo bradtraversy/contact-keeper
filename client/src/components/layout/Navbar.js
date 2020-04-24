@@ -1,7 +1,7 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { useAuth, loadUser, logout } from '../../context/auth/AuthState';
+import { useAuth, logout } from '../../context/auth/AuthState';
 import { useContacts, clearContacts } from '../../context/contact/ContactState';
 
 const Navbar = ({ title, icon }) => {
@@ -10,10 +10,6 @@ const Navbar = ({ title, icon }) => {
 
   // we just need the contact dispatch without state.
   const contactDispatch = useContacts()[1];
-
-  useEffect(() => {
-    loadUser(authDispatch);
-  }, [authDispatch]);
 
   const onLogout = () => {
     logout(authDispatch);
