@@ -30,7 +30,7 @@ const config = {
 };
 
 // Load User
-export const loadUser = async (dispatch) => {
+export const loadUser = async dispatch => {
   try {
     const res = await axios.get('/api/auth');
 
@@ -82,16 +82,16 @@ export const login = async (dispatch, formData) => {
 };
 
 // Logout
-export const logout = (dispatch) => {
+export const logout = dispatch => {
   dispatch({ type: LOGOUT });
 };
 
 // Clear Errors
-export const clearErrors = (dispatch) => dispatch({ type: CLEAR_ERRORS });
+export const clearErrors = dispatch => dispatch({ type: CLEAR_ERRORS });
 
 // AuthState Provider Component
 
-const AuthState = (props) => {
+const AuthState = props => {
   const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
@@ -106,7 +106,7 @@ const AuthState = (props) => {
   setAuthToken(state.token);
 
   // load user on first run or refresh
-  if (state.token && !state.user) {
+  if (state.loading) {
     loadUser(dispatch);
   }
 
