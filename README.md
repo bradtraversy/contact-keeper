@@ -59,7 +59,7 @@ _Use the hook to get our state and dispatch_
 ```js
 const [contactState, contactDispatch] = useContacts();
 
-const { contacts, filtered, loading } = contactState;
+const { contacts, filtered } = contactState;
 ```
 
 _And in our useEffect to fetch our users contacts_

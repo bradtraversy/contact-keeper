@@ -7,22 +7,22 @@ import { useContacts, getContacts } from '../../context/contact/ContactState';
 const Contacts = () => {
   const [contactState, contactDispatch] = useContacts();
 
-  const { contacts, filtered, loading } = contactState;
+  const { contacts, filtered } = contactState;
 
   useEffect(() => {
     getContacts(contactDispatch);
   }, [contactDispatch]);
 
-  if (contacts !== null && contacts.length === 0 && !loading) {
+  if (contacts !== null && contacts.length === 0) {
     return <h4>Please add a contact</h4>;
   }
 
   return (
     <Fragment>
-      {contacts !== null && !loading ? (
+      {contacts !== null ? (
         <TransitionGroup>
           {filtered !== null
-            ? filtered.map(contact => (
+            ? filtered.map((contact) => (
                 <CSSTransition
                   key={contact._id}
                   timeout={500}
@@ -31,7 +31,7 @@ const Contacts = () => {
                   <ContactItem contact={contact} />
                 </CSSTransition>
               ))
-            : contacts.map(contact => (
+            : contacts.map((contact) => (
                 <CSSTransition
                   key={contact._id}
                   timeout={500}
