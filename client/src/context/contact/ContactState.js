@@ -23,14 +23,9 @@ export const useContacts = () => {
 };
 
 // action creators
-const config = {
-  headers: {
-    'Content-Type': 'application/json'
-  }
-};
 
 // Get Contacts
-export const getContacts = async dispatch => {
+export const getContacts = async (dispatch) => {
   try {
     const res = await axios.get('/api/contacts');
 
@@ -49,7 +44,7 @@ export const getContacts = async dispatch => {
 // Add Contact
 export const addContact = async (dispatch, contact) => {
   try {
-    const res = await axios.post('/api/contacts', contact, config);
+    const res = await axios.post('/api/contacts', contact);
 
     dispatch({
       type: ADD_CONTACT,
@@ -83,11 +78,7 @@ export const deleteContact = async (dispatch, id) => {
 // Update Contact
 export const updateContact = async (dispatch, contact) => {
   try {
-    const res = await axios.put(
-      `/api/contacts/${contact._id}`,
-      contact,
-      config
-    );
+    const res = await axios.put(`/api/contacts/${contact._id}`, contact);
 
     dispatch({
       type: UPDATE_CONTACT,
@@ -102,7 +93,7 @@ export const updateContact = async (dispatch, contact) => {
 };
 
 // Clear Contacts
-export const clearContacts = dispatch => {
+export const clearContacts = (dispatch) => {
   dispatch({ type: CLEAR_CONTACTS });
 };
 
@@ -112,7 +103,7 @@ export const setCurrent = (dispatch, contact) => {
 };
 
 // Clear Current Contact
-export const clearCurrent = dispatch => {
+export const clearCurrent = (dispatch) => {
   dispatch({ type: CLEAR_CURRENT });
 };
 
@@ -122,11 +113,11 @@ export const filterContacts = (dispatch, text) => {
 };
 
 // Clear Filter
-export const clearFilter = dispatch => {
+export const clearFilter = (dispatch) => {
   dispatch({ type: CLEAR_FILTER });
 };
 
-const ContactState = props => {
+const ContactState = (props) => {
   const initialState = {
     contacts: null,
     current: null,
