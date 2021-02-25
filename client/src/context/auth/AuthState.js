@@ -23,14 +23,8 @@ export const useAuth = () => {
 
 // Action creators
 
-const config = {
-  headers: {
-    'Content-Type': 'application/json'
-  }
-};
-
 // Load User
-export const loadUser = async dispatch => {
+export const loadUser = async (dispatch) => {
   try {
     const res = await axios.get('/api/auth');
 
@@ -46,7 +40,7 @@ export const loadUser = async dispatch => {
 // Register User
 export const register = async (dispatch, formData) => {
   try {
-    const res = await axios.post('/api/users', formData, config);
+    const res = await axios.post('/api/users', formData);
 
     dispatch({
       type: REGISTER_SUCCESS,
@@ -65,7 +59,7 @@ export const register = async (dispatch, formData) => {
 // Login User
 export const login = async (dispatch, formData) => {
   try {
-    const res = await axios.post('/api/auth', formData, config);
+    const res = await axios.post('/api/auth', formData);
 
     dispatch({
       type: LOGIN_SUCCESS,
@@ -82,16 +76,16 @@ export const login = async (dispatch, formData) => {
 };
 
 // Logout
-export const logout = dispatch => {
+export const logout = (dispatch) => {
   dispatch({ type: LOGOUT });
 };
 
 // Clear Errors
-export const clearErrors = dispatch => dispatch({ type: CLEAR_ERRORS });
+export const clearErrors = (dispatch) => dispatch({ type: CLEAR_ERRORS });
 
 // AuthState Provider Component
 
-const AuthState = props => {
+const AuthState = (props) => {
   const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
