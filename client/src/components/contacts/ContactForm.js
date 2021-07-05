@@ -6,40 +6,39 @@ import {
   clearCurrent
 } from '../../context/contact/ContactState';
 
+const initialContact = {
+  name: '',
+  email: '',
+  phone: '',
+  type: 'personal'
+};
+
 const ContactForm = () => {
   const [contactState, contactDispatch] = useContacts();
 
   const { current } = contactState;
 
-  const [contact, setContact] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    type: 'personal'
-  });
+  const [contact, setContact] = useState(initialContact);
 
   useEffect(() => {
     if (current !== null) {
       setContact(current);
     } else {
-      setContact({
-        name: '',
-        email: '',
-        phone: '',
-        type: 'personal'
-      });
+      setContact(initialContact);
     }
   }, [current]);
 
   const { name, email, phone, type } = contact;
 
-  const onChange = e =>
+  const onChange = (e) =>
     setContact({ ...contact, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     if (current === null) {
-      addContact(contactDispatch, contact);
+      addContact(contactDispatch, contact).then(() =>
+        setContact(initialContact)
+      );
     } else {
       updateContact(contactDispatch, contact);
     }
