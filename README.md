@@ -2,7 +2,7 @@
 
 > Full stack MERN contact manager with React hooks, context & JWT authentication. Part of my [React course on Udemy.](https://www.udemy.com/share/101XdqAkUadVtQTH4=/)
 
-## This branch has been refactored to take a more hook orientated approach.
+## The app has been refactored since the course to take a more hook orientated approach and to use React Router 6.
 
 At the time of the course hooks were very new and much of their implementation tried to substitute lifecycle methods with the closest hooks approximation which is understandable, many tutorials and courses early to adopt hooks took this approach. Hooks were very new at the time of recording, as more clearly defined patterns of use have emerged it's clear that hooks require a completely different approach and thought process to lifecycle methods. We need to think in terms of hooks and functions and not lifecycle.
 
