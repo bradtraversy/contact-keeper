@@ -1,8 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import AlertContext from '../../context/alert/alertContext';
 import { useAuth, clearErrors, register } from '../../context/auth/AuthState';
 
-const Register = props => {
+const Register = (props) => {
   const alertContext = useContext(AlertContext);
   const [authState, authDispatch] = useAuth();
   const { error, isAuthenticated } = authState;
@@ -10,10 +11,6 @@ const Register = props => {
   const { setAlert } = alertContext;
 
   useEffect(() => {
-    if (isAuthenticated) {
-      props.history.push('/');
-    }
-
     if (error === 'User already exists') {
       setAlert(error, 'danger');
       clearErrors(authDispatch);
@@ -29,9 +26,9 @@ const Register = props => {
 
   const { name, email, password, password2 } = user;
 
-  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     if (name === '' || email === '' || password === '') {
       setAlert('Please enter all fields', 'danger');
@@ -45,6 +42,8 @@ const Register = props => {
       });
     }
   };
+
+  if (isAuthenticated) return <Navigate to='/' />;
 
   return (
     <div className='form-container'>
