@@ -1,48 +1,52 @@
-import React, { useState, useContext, useEffect } from 'react';
-import ContactContext from '../../context/contact/contactContext';
+import React, { useState, useEffect } from 'react';
+import {
+  addContact,
+  useContacts,
+  updateContact,
+  clearCurrent
+} from '../../context/contact/ContactState';
+
+const initialContact = {
+  name: '',
+  email: '',
+  phone: '',
+  type: 'personal'
+};
 
 const ContactForm = () => {
-  const contactContext = useContext(ContactContext);
+  const [contactState, contactDispatch] = useContacts();
 
-  const { addContact, updateContact, clearCurrent, current } = contactContext;
+  const { current } = contactState;
+
+  const [contact, setContact] = useState(initialContact);
 
   useEffect(() => {
     if (current !== null) {
       setContact(current);
     } else {
-      setContact({
-        name: '',
-        email: '',
-        phone: '',
-        type: 'personal'
-      });
+      setContact(initialContact);
     }
-  }, [contactContext, current]);
-
-  const [contact, setContact] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    type: 'personal'
-  });
+  }, [current]);
 
   const { name, email, phone, type } = contact;
 
-  const onChange = e =>
+  const onChange = (e) =>
     setContact({ ...contact, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     if (current === null) {
-      addContact(contact);
+      addContact(contactDispatch, contact).then(() =>
+        setContact(initialContact)
+      );
     } else {
-      updateContact(contact);
+      updateContact(contactDispatch, contact);
     }
     clearAll();
   };
 
   const clearAll = () => {
-    clearCurrent();
+    clearCurrent(contactDispatch);
   };
 
   return (

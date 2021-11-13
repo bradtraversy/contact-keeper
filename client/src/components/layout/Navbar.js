@@ -1,34 +1,29 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import AuthContext from '../../context/auth/authContext';
-import ContactContext from '../../context/contact/contactContext';
+import { useAuth, logout } from '../../context/auth/AuthState';
+import { useContacts, clearContacts } from '../../context/contact/ContactState';
 
 const Navbar = ({ title, icon }) => {
-  const authContext = useContext(AuthContext);
-  const contactContext = useContext(ContactContext);
+  const [authState, authDispatch] = useAuth();
+  const { isAuthenticated, user } = authState;
 
-  const { isAuthenticated, logout, user, loadUser } = authContext;
-  const { clearContacts } = contactContext;
-
-  useEffect(() => {
-    loadUser();
-    // eslint-disable-next-line
-  }, []);
+  // we just need the contact dispatch without state.
+  const contactDispatch = useContacts()[1];
 
   const onLogout = () => {
-    logout();
-    clearContacts();
+    logout(authDispatch);
+    clearContacts(contactDispatch);
   };
 
   const authLinks = (
     <Fragment>
       <li>Hello {user && user.name}</li>
       <li>
-        <a onClick={onLogout} href='#!'>
+        <Link onClick={onLogout} to='/login'>
           <i className='fas fa-sign-out-alt' />{' '}
           <span className='hide-sm'>Logout</span>
-        </a>
+        </Link>
       </li>
     </Fragment>
   );

@@ -1,25 +1,21 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import AlertContext from '../../context/alert/alertContext';
-import AuthContext from '../../context/auth/authContext';
+import { useAuth, clearErrors, register } from '../../context/auth/AuthState';
 
-const Register = props => {
+const Register = (props) => {
   const alertContext = useContext(AlertContext);
-  const authContext = useContext(AuthContext);
+  const [authState, authDispatch] = useAuth();
+  const { error, isAuthenticated } = authState;
 
   const { setAlert } = alertContext;
-  const { register, error, clearErrors, isAuthenticated } = authContext;
 
   useEffect(() => {
-    if (isAuthenticated) {
-      props.history.push('/');
-    }
-
     if (error === 'User already exists') {
       setAlert(error, 'danger');
-      clearErrors();
+      clearErrors(authDispatch);
     }
-    // eslint-disable-next-line
-  }, [error, isAuthenticated, props.history]);
+  }, [error, isAuthenticated, props.history, setAlert, authDispatch]);
 
   const [user, setUser] = useState({
     name: '',
@@ -30,22 +26,24 @@ const Register = props => {
 
   const { name, email, password, password2 } = user;
 
-  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     if (name === '' || email === '' || password === '') {
       setAlert('Please enter all fields', 'danger');
     } else if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
     } else {
-      register({
+      register(authDispatch, {
         name,
         email,
         password
       });
     }
   };
+
+  if (isAuthenticated) return <Navigate to='/' />;
 
   return (
     <div className='form-container'>
