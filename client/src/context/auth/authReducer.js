@@ -9,7 +9,7 @@ import {
   CLEAR_ERRORS
 } from '../types';
 
-export default (state, action) => {
+const authReducer = (state, action) => {
   switch (action.type) {
     case USER_LOADED:
       return {
@@ -47,3 +47,5 @@ export default (state, action) => {
       throw new Error(`Unsupported type of: ${action.type}`);
   }
 };
+
+export default authReducer;
