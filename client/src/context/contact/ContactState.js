@@ -23,8 +23,7 @@ export const useContacts = () => {
 };
 
 // Action creators
-// These could be moved to a separate file like in redux
-// but they remain here for ease of students transitioning
+// NOTE: These could be moved to a separate file like in redux but they remain here for ease of students transitioning
 
 // Get Contacts
 export const getContacts = async (dispatch) => {
