@@ -6,7 +6,10 @@
 
 At the time of the course hooks were very new and much of their implementation tried to substitute lifecycle methods with the closest hooks approximation which is understandable, many tutorials and courses early to adopt hooks took this approach. Hooks were very new at the time of recording, as more clearly defined patterns of use have emerged it's clear that hooks require a completely different approach and thought process to lifecycle methods. We need to think in terms of hooks and functions and not lifecycle.
 
-If you're looking at this branch or wondering why in the course we had to use `// eslint-disable-next-line` or thought _this doesn't feel right ignoring the linting rules_, then I urge you to have a read of [this post on overreacted by Dan Abramov](https://overreacted.io/a-complete-guide-to-useeffect/). It covers a lot more than just `useEffect`
+If you are looking for the code you will see in the Udemy course then please
+check out the [originalcoursecode branch](https://github.com/bradtraversy/contact-keeper/tree/originalcoursecode) of this repository.
+
+If you're looking to fix your course code or wondering why in the course we had to use `// eslint-disable-next-line` or thought _this doesn't feel right ignoring the linting rules_, then I urge you to have a read of [this post on overreacted by Dan Abramov](https://overreacted.io/a-complete-guide-to-useeffect/). It covers a lot more than just `useEffect`
 There is also [this great article](https://epicreact.dev/myths-about-useeffect/) from Kent C. Dodds.
 And [this excellent full explanation](https://blog.logrocket.com/guide-to-react-useeffect-hook/) of useEffect on the LogRocket blog.
 
