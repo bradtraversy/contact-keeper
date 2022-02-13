@@ -95,7 +95,7 @@ router.put('/:id', auth, async (req, res) => {
 // @access    Private
 router.delete('/:id', auth, async (req, res) => {
   try {
-    let contact = await Contact.findById(req.params.id);
+    const contact = await Contact.findById(req.params.id);
 
     if (!contact) return res.status(404).json({ msg: 'Contact not found' });
 
